@@ -9,11 +9,17 @@ import { useState, useEffect } from "react"
 const graphicDesignProjects = [
   {
     id: 1,
-    title: "Brand Identity Design",
+    title: "Marathon Countdown",
     description:
       "Complete brand identity package including logo, color palette, and brand guidelines for a tech startup.",
-    images: ["/placeholder-1ged5.png", "/placeholder-d8445.png", "/corporate-presentation-templates.png"],
-    category: "Branding",
+    images: [
+      "/images/countdown 5.jpg",
+      "/images/countdown 4.jpg",
+      "/images/countdown 3.jpg",
+      "/images/countdown 2.jpg",
+      "/images/countdown 1.jpg",
+    ],
+    category: "Social Media",
     tools: ["Adobe Illustrator", "Adobe Photoshop"],
     year: "2024",
   },

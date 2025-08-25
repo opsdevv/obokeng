@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -10,7 +11,6 @@ const navItems = [
 	{ name: "Home", href: "/" },
 	{ name: "About", href: "/#about" },
 	{ name: "Skills", href: "/#skills" },
-	{ name: "Other Skills", href: "/#other-skills" },
 	{ name: "Contact", href: "/#contact" },
 ]
 
@@ -49,11 +49,8 @@ export default function Navbar() {
 		>
 			<div className="container mx-auto px-4 py-3">
 				<div className="flex items-center justify-between">
-					<Link
-						href="/"
-						className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-200 hover:opacity-80 transition-opacity"
-					>
-						OBK
+					<Link href="/" className="flex items-center gap-2">
+						<Image src="/images/logo.svg" alt="OBK Logo" width={88} height={88} priority />
 					</Link>
 
 					{/* Desktop Navigation */}
