@@ -1,12 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Montserrat } from "next/font/google"
+import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
-const montserrat = Montserrat({ 
-  subsets: ['latin'],
-  variable: '--font-montserrat',
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -25,8 +26,8 @@ export default function RootLayout({
       <head>
         <style>{`
 html {
-  font-family: ${montserrat.style.fontFamily};
-  --font-montserrat: ${montserrat.variable};
+  font-family: ${inter.style.fontFamily}, system-ui, sans-serif;
+  --font-inter: ${inter.variable};
 }
         `}</style>
       </head>

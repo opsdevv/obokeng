@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { GlowMenu } from "./glow-menu"
 
 const navItems = [
 	{ name: "Home", href: "/" },
@@ -34,10 +35,6 @@ export default function Navbar() {
 		return () => window.removeEventListener("scroll", handleScroll)
 	}, [])
 
-	const isActive = (href: string) => pathname === href || pathname.startsWith(href)
-	const baseLink =
-		"relative text-gray-300 hover:text-teal-400 transition-colors duration-200 font-medium after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-teal-400 after:w-0 hover:after:w-full after:transition-all"
-
 	return (
 		<nav
 			className={cn(
@@ -54,36 +51,14 @@ export default function Navbar() {
 					</Link>
 
 					{/* Desktop Navigation */}
-					<div className="hidden md:flex items-center gap-3">
-						<div className={cn(
-							"hidden md:flex items-center gap-6 px-4 py-2 rounded-full border shadow-lg backdrop-blur-md",
-							"border-gray-800/60 bg-gray-950/60"
-						)}>
-							{pageLinks.map((item) => (
-								<Link
-									key={item.name}
-									href={item.href}
-									className={cn(baseLink, isActive(item.href) && "text-teal-400 after:w-full")}
-								>
-									{item.name}
-								</Link>
-							))}
-							{navItems
-								.filter((i) => i.name !== "Contact")
-								.map((item) => (
-									<Link
-										key={item.name}
-										href={item.href}
-										className={baseLink}
-									>
-										{item.name}
-									</Link>
-								))}
-						</div>
+					<div className="hidden md:flex items-center gap-6">
+						<GlowMenu items={pageLinks} />
+						
+						<GlowMenu items={navItems.filter((i) => i.name !== "Contact")} />
 
 						<Link
 							href="/#contact"
-							className="ml-3 inline-flex items-center rounded-full bg-gradient-to-r from-teal-500 to-teal-400 text-gray-900 px-4 py-2 font-semibold shadow-[0_0_12px_rgba(45,212,191,0.4)] hover:shadow-[0_0_18px_rgba(45,212,191,0.6)] transition-all"
+							className="inline-flex items-center rounded-lg bg-brand text-white text-sm font-medium px-5 py-2.5 hover:opacity-90 transition-opacity"
 						>
 							Contact
 						</Link>
@@ -93,9 +68,9 @@ export default function Navbar() {
 					<div className="md:hidden">
 						<button 
 							onClick={() => setIsOpen(!isOpen)} 
-							className="p-2 rounded-xl bg-gray-900/80 border border-gray-800 text-gray-300 hover:bg-gray-800 transition-colors shadow"
+							className="p-2.5 rounded-lg bg-[#1c1c1c] border border-[#2e2e2e] text-[#ecedee] hover:bg-[#232323] hover:border-[#343434] transition-colors"
 						>
-							{isOpen ? <X size={20} /> : <Menu size={20} />}
+							{isOpen ? <X size={18} /> : <Menu size={18} />}
 						</button>
 					</div>
 				</div>
@@ -103,13 +78,13 @@ export default function Navbar() {
 
 			{/* Mobile Navigation Menu */}
 			{isOpen && (
-				<div className="md:hidden bg-gray-950/95 backdrop-blur-xl border-b border-gray-800 shadow-lg">
-					<div className="container mx-auto px-4 py-4 space-y-2">
+				<div className="md:hidden bg-[#1a1d1e] border-b border-[#2b2f31]">
+					<div className="container mx-auto px-4 py-4 space-y-1">
 						{pageLinks.map((item) => (
 							<Link
 								key={item.name}
 								href={item.href}
-								className="block py-3 px-4 rounded-lg text-gray-300 hover:text-teal-400 hover:bg-gray-800 transition-all font-medium"
+								className="block py-3 px-4 rounded-lg text-[#9ba1a6] hover:text-[#ecedee] hover:bg-[#202425] transition-colors text-sm font-medium"
 								onClick={() => setIsOpen(false)}
 							>
 								{item.name}
@@ -119,17 +94,16 @@ export default function Navbar() {
 							<Link
 								key={item.name}
 								href={item.href}
-								className="block py-3 px-4 rounded-lg text-gray-300 hover:text-teal-400 hover:bg-gray-800 transition-all"
+								className="block py-3 px-4 rounded-lg text-[#9ba1a6] hover:text-[#ecedee] hover:bg-[#202425] transition-colors text-sm"
 								onClick={() => setIsOpen(false)}
 							>
 								{item.name}
 							</Link>
 						))}
-
-						<div className="pt-2">
+						<div className="pt-3">
 							<Link
 								href="/#contact"
-								className="block w-full text-center rounded-lg bg-gradient-to-r from-teal-500 to-teal-400 text-gray-900 py-3 font-semibold shadow hover:opacity-95"
+								className="block w-full text-center rounded-lg bg-brand text-white py-3 text-sm font-medium hover:opacity-90 transition-opacity"
 								onClick={() => setIsOpen(false)}
 							>
 								Contact

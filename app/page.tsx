@@ -23,32 +23,13 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 text-gray-900 dark:text-gray-100 overflow-hidden transition-colors duration-300">
-      {/* Animated Background */}
-      <div className="fixed inset-0 overflow-hidden">
-        {/* Gradient Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-500"></div>
-        
-        {/* Floating Particles */}
-        <div className="absolute inset-0">
-          {particlePositions.map((particle, i) => (
-            <div
-              key={i}
-              className="absolute w-2 h-2 bg-teal-400/30 rounded-full animate-float"
-              style={{
-                left: particle.left,
-                top: particle.top,
-                animationDelay: particle.delay,
-                animationDuration: particle.duration
-              }}
-            />
-          ))}
-        </div>
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10 dark:opacity-20"></div>
+    <main className="min-h-screen bg-[#f8f9fa] dark:bg-[#151718] text-[#11181c] dark:text-[#ecedee] overflow-hidden transition-colors duration-300">
+      {/* Supabase-style background: subtle gradient + brand glow */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 dark:bg-gradient-to-b from-[#151718] via-[#1a1d1e] to-[#151718]" />
+        <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-brand/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-brand-accent/8 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)] bg-[size:64px_64px] dark:opacity-50 opacity-30" />
       </div>
       
       <Navbar />

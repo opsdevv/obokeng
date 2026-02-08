@@ -148,11 +148,11 @@ export default function WebDevelopmentPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 transition-colors duration-300">
+    <main className="min-h-screen bg-[#151718] text-[#ecedee] transition-colors duration-300">
       {/* Animated Background */}
       <div className="fixed inset-0 overflow-hidden">
         {/* Gradient Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/15 rounded-full blur-3xl" />
         <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-500"></div>
         
@@ -161,7 +161,7 @@ export default function WebDevelopmentPage() {
           {particlePositions.map((particle, index) => (
             <div
               key={index}
-              className="absolute w-2 h-2 bg-teal-400/30 rounded-full animate-float"
+              className="absolute w-2 h-2 bg-brand/30 rounded-full animate-float"
               style={{
                 left: particle.left,
                 top: particle.top,
@@ -183,18 +183,18 @@ export default function WebDevelopmentPage() {
         <div className="mb-12">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-brand hover:opacity-80 transition-opacity mb-6"
           >
             <ArrowLeft size={20} />
             Back to Portfolio
           </Link>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-200">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand">
               Web Development
             </span>
           </h1>
-          <p className="text-lg sm:text-xl text-gray-300 max-w-2xl font-thin">
+          <p className="text-lg sm:text-xl text-[#9ba1a6] max-w-2xl">
             Building modern, responsive web applications with cutting-edge technologies. 
             From simple websites to complex web applications, I create digital experiences that engage and inspire.
           </p>
@@ -205,7 +205,7 @@ export default function WebDevelopmentPage() {
           {webDevelopmentProjects.map((project) => (
             <div
               key={project.id}
-              className="group bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-800 hover:border-teal-500/50 transition-all duration-300 hover:transform hover:scale-105 shadow-lg hover:shadow-xl"
+              className="group bg-[#1c1c1c] rounded-xl overflow-hidden border border-[#2e2e2e] hover:border-[#3a3f42] transition-all duration-300 hover:scale-[1.02]"
             >
               {/* Image Gallery Preview */}
               <div className="relative aspect-video overflow-hidden">
@@ -215,28 +215,28 @@ export default function WebDevelopmentPage() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 {/* Gallery Button */}
                 <button
                   onClick={() => openGallery(project)}
                   className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 >
-                  <div className="bg-teal-500/90 text-white p-4 rounded-full shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                  <div className="bg-brand text-white p-4 rounded-full shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-300">
                     <ExternalLink size={24} />
                   </div>
                 </button>
                 
                 {/* Category Badge */}
                 <div className="absolute top-4 right-4">
-                  <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
+                  <span className="bg-brand/20 text-brand px-3 py-1 rounded-full text-sm font-medium">
                     {project.category}
                   </span>
                 </div>
                 
                 {/* Year Badge */}
                 <div className="absolute top-4 left-4">
-                  <span className="bg-gray-800/20 text-gray-200 px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
+                  <span className="bg-[#26292b] text-[#ecedee] px-2 py-1 rounded-full text-xs font-medium">
                     {project.year}
                   </span>
                 </div>
@@ -244,11 +244,11 @@ export default function WebDevelopmentPage() {
 
               {/* Content */}
               <div className="p-5 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-100 group-hover:text-teal-300 transition-colors mb-3 line-clamp-2">
+                <h3 className="text-lg sm:text-xl font-semibold text-[#ecedee] group-hover:text-brand transition-colors mb-3 line-clamp-2">
                   {project.title}
                 </h3>
 
-                <p className="text-gray-300 mb-4 text-sm leading-relaxed line-clamp-3 font-thin">
+                <p className="text-[#9ba1a6] mb-4 text-sm leading-relaxed line-clamp-3">
                   {project.description}
                 </p>
 
@@ -257,7 +257,7 @@ export default function WebDevelopmentPage() {
                   {project.tools.map((tool) => (
                     <span 
                       key={tool} 
-                      className="bg-gray-800 text-gray-300 px-2 py-1 rounded-lg text-xs font-medium"
+                      className="bg-[#26292b] text-[#9ba1a6] px-2 py-1 rounded-md text-xs font-medium"
                     >
                       {tool}
                     </span>
@@ -268,7 +268,7 @@ export default function WebDevelopmentPage() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => openGallery(project)}
-                    className="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 transition-colors text-sm font-medium group/btn"
+                    className="inline-flex items-center gap-2 text-brand hover:opacity-80 transition-opacity text-sm font-medium group/btn"
                   >
                     View Gallery
                     <ExternalLink size={14} className="group-hover/btn:translate-x-1 transition-transform" />
@@ -281,16 +281,16 @@ export default function WebDevelopmentPage() {
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-teal-500/20 to-teal-400/20 rounded-2xl p-6 sm:p-8 border border-teal-500/20">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-200">
+          <div className="bg-brand/10 rounded-xl p-6 sm:p-8 border border-brand/20">
+            <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-foreground">
               Let's Build Something Amazing Together
             </h2>
-            <p className="text-gray-300 mb-6 max-w-2xl mx-auto font-thin">
+            <p className="text-[#9ba1a6] mb-6 max-w-2xl mx-auto text-sm">
               Ready to bring your web development ideas to life? I'd love to discuss your next project.
             </p>
             <Link
               href="/#contact"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-400 text-white px-6 py-3 rounded-lg font-medium hover:from-teal-400 hover:to-teal-300 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="inline-flex items-center gap-2 bg-brand text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
             >
               Get In Touch
             </Link>
@@ -305,7 +305,7 @@ export default function WebDevelopmentPage() {
             {/* Close Button */}
             <button
               onClick={closeGallery}
-              className="absolute top-4 right-4 z-10 bg-gray-800/80 text-white p-2 rounded-full hover:bg-gray-700/80 transition-colors"
+              className="absolute top-4 right-4 z-10 bg-[#2e2e2e] text-white p-2 rounded-full hover:bg-[#3e3e3e] transition-colors"
             >
               <X size={24} />
             </button>
@@ -313,14 +313,14 @@ export default function WebDevelopmentPage() {
             {/* Navigation Arrows */}
             <button
               onClick={prevImage}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-gray-800/80 text-white p-3 rounded-full hover:bg-gray-700/80 transition-colors"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-[#2e2e2e] text-white p-3 rounded-full hover:bg-[#3e3e3e] transition-colors"
             >
               <ChevronLeft size={24} />
             </button>
 
             <button
               onClick={nextImage}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-gray-800/80 text-white p-3 rounded-full hover:bg-gray-700/80 transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-[#2e2e2e] text-white p-3 rounded-full hover:bg-[#3e3e3e] transition-colors"
             >
               <ChevronRight size={24} />
             </button>
@@ -336,14 +336,14 @@ export default function WebDevelopmentPage() {
             </div>
 
             {/* Image Counter */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-gray-800/80 text-white px-3 py-1 rounded-full text-sm">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-[#2e2e2e] text-white px-3 py-1 rounded-full text-sm">
               {currentImageIndex + 1} / {selectedProject.images.length}
             </div>
 
             {/* Project Info */}
             <div className="mt-4 text-center">
               <h3 className="text-xl font-semibold text-white mb-2">{selectedProject.title}</h3>
-              <p className="text-gray-300 text-sm">{selectedProject.description}</p>
+              <p className="text-[#9ba1a6] text-sm">{selectedProject.description}</p>
             </div>
           </div>
         </div>

@@ -13,6 +13,11 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+  			brand: {
+  				DEFAULT: 'hsl(152 63% 53%)',
+  				accent: 'hsl(152 56% 47%)',
+  				muted: 'hsl(152 63% 53% / 0.15)',
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -65,9 +70,11 @@ const config: Config = {
   			}
   		},
   		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
+  			lg: '8px',
+  			md: '6px',
+  			sm: '4px',
+  			xl: '12px',
+  			'2xl': '16px',
   		},
   		keyframes: {
   			'accordion-down': {

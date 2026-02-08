@@ -42,7 +42,16 @@ export default function Contact() {
         body: JSON.stringify(formData),
       })
 
-      const result = await response.json()
+      const contentType = response.headers.get('content-type')
+      let result: { message?: string; error?: string }
+      try {
+        const text = await response.text()
+        result = text && contentType?.includes('application/json')
+          ? JSON.parse(text)
+          : { error: response.ok ? 'Invalid response from server' : `Request failed (${response.status})` }
+      } catch {
+        result = { error: `Request failed (${response.status})` }
+      }
 
       if (response.ok) {
         // Success - reset form and show success message
@@ -68,29 +77,29 @@ export default function Contact() {
 
   const contactInfo = [
     {
-      icon: <MapPin className="h-5 w-5 text-teal-400" />,
+      icon: <MapPin className="h-5 w-5 text-brand" />,
       label: "Location",
       value: "Botswana",
     },
     {
-      icon: <Phone className="h-5 w-5 text-teal-400" />,
+      icon: <Phone className="h-5 w-5 text-brand" />,
       label: "Phone",
-      value: "+267 XXX XXX XXX",
+      value: "+267 74 521 205",
     },
     {
-      icon: <Mail className="h-5 w-5 text-teal-400" />,
+      icon: <Mail className="h-5 w-5 text-brand" />,
       label: "Email",
       value: "obokeng.mark@gmail.com",
       link: "mailto:obokeng.mark@gmail.com",
     },
     {
-      icon: <Linkedin className="h-5 w-5 text-teal-400" />,
+      icon: <Linkedin className="h-5 w-5 text-brand" />,
       label: "LinkedIn",
       value: "linkedin.com/in/obokeng-makwati-963304151",
       link: "https://www.linkedin.com/in/obokeng-makwati-963304151/",
     },
     {
-      icon: <Github className="h-5 w-5 text-teal-400" />,
+      icon: <Github className="h-5 w-5 text-brand" />,
       label: "GitHub",
       value: "github.com/obokengmakwati",
       link: "https://github.com/obokengmakwati",
@@ -108,25 +117,25 @@ export default function Contact() {
             mounted && "opacity-100 translate-x-0",
           )}
         >
-          <div className="bg-gray-900/30 backdrop-blur-sm p-6 rounded-xl border border-gray-800/50">
-            <h3 className="text-xl font-semibold text-gray-200 mb-4">Contact Information</h3>
+          <div className="bg-[#1c1c1c] p-6 rounded-lg border border-[#2e2e2e]">
+            <h3 className="text-base font-semibold text-[#ecedee] mb-4">Contact Information</h3>
             <div className="space-y-4">
               {contactInfo.map((info, index) => (
                 <div key={index} className="flex items-start gap-3">
                   <div className="mt-1">{info.icon}</div>
                   <div>
-                    <h4 className="text-sm text-gray-400">{info.label}</h4>
+                    <h4 className="text-xs text-[#9ba1a6]">{info.label}</h4>
                     {info.link ? (
                       <a
                         href={info.link}
                         target={info.label === "Email" ? "_self" : "_blank"}
                         rel={info.label === "Email" ? "" : "noopener noreferrer"}
-                        className="text-gray-300 hover:text-teal-400 transition-colors"
+                        className="text-sm text-[#ecedee] hover:text-brand transition-colors"
                       >
                         {info.value}
                       </a>
                     ) : (
-                      <p className="text-gray-300">{info.value}</p>
+                      <p className="text-sm text-[#ecedee]">{info.value}</p>
                     )}
                   </div>
                 </div>
@@ -143,12 +152,12 @@ export default function Contact() {
         >
           <form
             onSubmit={handleSubmit}
-            className="bg-gray-900/30 backdrop-blur-sm p-6 rounded-xl border border-gray-800/50"
+            className="bg-[#1c1c1c] p-6 rounded-lg border border-[#2e2e2e]"
           >
-            <h3 className="text-xl font-semibold text-gray-200 mb-4">Send Me a Message</h3>
+            <h3 className="text-base font-semibold text-[#ecedee] mb-4">Send Me a Message</h3>
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="text-sm text-gray-400 mb-1 block">
+                <label htmlFor="name" className="text-xs text-[#9ba1a6] mb-1 block">
                   Name
                 </label>
                 <Input
@@ -158,11 +167,11 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Your name"
                   required
-                  className="bg-gray-800/50 border-gray-700 focus:border-teal-500 focus:ring-teal-500/20"
+                  className="bg-[#232323] border-[#2e2e2e] focus:border-brand focus:ring-brand/20 text-[#ecedee] placeholder:text-[#6f6f6f]"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="text-sm text-gray-400 mb-1 block">
+                <label htmlFor="email" className="text-xs text-[#9ba1a6] mb-1 block">
                   Email
                 </label>
                 <Input
@@ -173,11 +182,11 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Your email"
                   required
-                  className="bg-gray-800/50 border-gray-700 focus:border-teal-500 focus:ring-teal-500/20"
+                  className="bg-[#232323] border-[#2e2e2e] focus:border-brand focus:ring-brand/20 text-[#ecedee] placeholder:text-[#6f6f6f]"
                 />
               </div>
               <div>
-                <label htmlFor="message" className="text-sm text-gray-400 mb-1 block">
+                <label htmlFor="message" className="text-xs text-[#9ba1a6] mb-1 block">
                   Message
                 </label>
                 <Textarea
@@ -187,23 +196,23 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Your message"
                   required
-                  className="bg-gray-800/50 border-gray-700 focus:border-teal-500 focus:ring-teal-500/20 min-h-[120px]"
+                  className="bg-[#232323] border-[#2e2e2e] focus:border-brand focus:ring-brand/20 text-[#ecedee] placeholder:text-[#6f6f6f] min-h-[120px]"
                 />
               </div>
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-teal-500 to-teal-400 text-gray-900 hover:shadow-[0_0_15px_rgba(45,212,191,0.5)] transition-all duration-300 disabled:opacity-50"
+                className="w-full bg-brand text-white hover:opacity-90 transition-opacity disabled:opacity-50 text-sm font-medium"
               >
                 <Send className="h-4 w-4 mr-2" />
-                {isSubmitting ? "Opening Email..." : "Send Message"}
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </div>
           </form>
         </div>
       </div>
 
-      <div className="mt-20 text-center text-gray-500 text-sm">
+      <div className="mt-20 text-center text-[#687076] dark:text-[#9ba1a6] text-xs">
         <p>© {new Date().getFullYear()} Obokeng Makwati. All rights reserved.</p>
       </div>
     </section>

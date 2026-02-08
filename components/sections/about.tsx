@@ -15,24 +15,24 @@ export default function About() {
 
   const quickFacts = [
     {
-      icon: <Palette className="h-5 w-5 text-teal-400" />,
+      icon: <Palette className="h-5 w-5 text-brand" />,
       title: "Graphic Design",
       description: "10+ years crafting bold visuals and eye-catching brands",
     },
     {
-      icon: <Video className="h-5 w-5 text-teal-400" />,
+      icon: <Video className="h-5 w-5 text-brand" />,
       title: "Motion Graphics",
       description: "Dynamic video content and seamless animations",
     },
     {
-      icon: <Code className="h-5 w-5 text-teal-400" />,
+      icon: <Code className="h-5 w-5 text-brand" />,
       title: "Web Development",
       description: "Pixel-perfect digital experiences with modern tech",
     },
     {
-      icon: <Award className="h-5 w-5 text-teal-400" />,
-      title: "Creative Powerhouse",
-      description: "Always ahead of trends, pushing creative boundaries",
+      icon: <Award className="h-5 w-5 text-brand" />,
+      title: "Data Engineering",
+      description: "I transform raw data into reliable systems that drive decisions.",
     },
   ]
 
@@ -48,9 +48,9 @@ export default function About() {
           )}
         >
           <div className="relative w-full aspect-square max-w-md mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/20 to-teal-300/20 rounded-2xl -rotate-6 transform scale-95"></div>
-            <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm rounded-2xl border border-gray-800/50"></div>
-            <div className="relative h-full w-full overflow-hidden rounded-2xl">
+            <div className="absolute inset-0 bg-brand/10 rounded-xl -rotate-6 transform scale-95" />
+            <div className="absolute inset-0 bg-[#1c1c1c] rounded-xl border border-[#2e2e2e]" />
+            <div className="relative h-full w-full overflow-hidden rounded-xl">
               <Image
                 src="/images/profile.png"
                 alt="Obokeng Makwati"
@@ -69,13 +69,13 @@ export default function About() {
             mounted && "opacity-100 translate-x-0",
           )}
         >
-          <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800/50 shadow-lg">
-            <p className="text-gray-300 leading-relaxed font-thin">
-              OBK is a creative powerhouse with over 10 years of experience in graphic design, motion graphics, and web
+          <div className="bg-[#1c1c1c] p-6 rounded-xl border border-[#2e2e2e]">
+            <p className="text-[#9ba1a6] leading-relaxed text-sm">
+              I AM a creative powerhouse with over 10 years of experience in graphic design, motion graphics, and web
               development. I bring ideas to life with bold visuals, seamless animations, and pixel-perfect digital
               experiences.
             </p>
-            <p className="text-gray-300 leading-relaxed mt-4 font-thin">
+            <p className="text-[#9ba1a6] leading-relaxed mt-4 text-sm">
               Whether it's crafting eye-catching brands, dynamic video content, or interactive websites, I blend
               artistry with tech-savvy precision to create work that grabs attention and gets results. Always ahead of
               trends, I thrive on pushing creative boundaries and turning big ideas into visual magic.
@@ -86,13 +86,13 @@ export default function About() {
             {quickFacts.map((fact, index) => (
               <div
                 key={index}
-                className="bg-gray-900/30 backdrop-blur-sm p-4 rounded-xl border border-gray-800/50 hover:border-teal-500/50 transition-all duration-300 hover:shadow-[0_0_15px_rgba(45,212,191,0.15)]"
+                className="bg-[#1c1c1c] p-4 rounded-lg border border-[#2e2e2e] hover:border-[#3a3f42] transition-colors"
               >
                 <div className="flex items-start gap-3">
                   <div className="mt-1">{fact.icon}</div>
                   <div>
-                    <h3 className="font-medium text-gray-200">{fact.title}</h3>
-                    <p className="text-sm text-gray-400">{fact.description}</p>
+                    <h3 className="font-medium text-[#ecedee] text-sm">{fact.title}</h3>
+                    <p className="text-xs text-[#9ba1a6] mt-0.5">{fact.description}</p>
                   </div>
                 </div>
               </div>
