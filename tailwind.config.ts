@@ -4,6 +4,8 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
     darkMode: ["class"],
+    // Prevent invalid CSS: [--cell-size:--spacing(8)] compiles to var(--spacing(8)) which is invalid
+    blocklist: ["[--cell-size:--spacing(8)]"],
     content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
