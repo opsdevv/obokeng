@@ -43,24 +43,6 @@ export default function Skills() {
         { label: "Custom BI dashboard", desc: "TypeScript, Next.js" },
       ],
     },
-    {
-      icon: <Wrench className="h-6 w-6" />,
-      title: "Creative Tools",
-      percentage: "90%",
-      skills: ["Adobe Creative Suite", "UI/UX Design", "Responsive Design", "Creative Direction"],
-      logos: [
-        {
-          name: "Adobe Creative Suite",
-          logo: "🎨",
-          description: "Professional design software suite"
-        },
-        {
-          name: "Cursor",
-          logo: "🚀",
-          description: "AI-powered code editor"
-        }
-      ]
-    },
   ]
 
   return (

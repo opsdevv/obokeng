@@ -200,83 +200,9 @@ export default function WebDevelopmentPage() {
           </p>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {webDevelopmentProjects.map((project) => (
-            <div
-              key={project.id}
-              className="group bg-[#1c1c1c] rounded-xl overflow-hidden border border-[#2e2e2e] hover:border-[#3a3f42] transition-all duration-300 hover:scale-[1.02]"
-            >
-              {/* Image Gallery Preview */}
-              <div className="relative aspect-video overflow-hidden">
-                <Image
-                  src={project.images[0]}
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                {/* Gallery Button */}
-                <button
-                  onClick={() => openGallery(project)}
-                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                >
-                  <div className="bg-brand text-white p-4 rounded-full shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                    <ExternalLink size={24} />
-                  </div>
-                </button>
-                
-                {/* Category Badge */}
-                <div className="absolute top-4 right-4">
-                  <span className="bg-brand/20 text-brand px-3 py-1 rounded-full text-sm font-medium">
-                    {project.category}
-                  </span>
-                </div>
-                
-                {/* Year Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className="bg-[#26292b] text-[#ecedee] px-2 py-1 rounded-full text-xs font-medium">
-                    {project.year}
-                  </span>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-5 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-semibold text-[#ecedee] group-hover:text-brand transition-colors mb-3 line-clamp-2">
-                  {project.title}
-                </h3>
-
-                <p className="text-[#9ba1a6] mb-4 text-sm leading-relaxed line-clamp-3">
-                  {project.description}
-                </p>
-
-                {/* Tools */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tools.map((tool) => (
-                    <span 
-                      key={tool} 
-                      className="bg-[#26292b] text-[#9ba1a6] px-2 py-1 rounded-md text-xs font-medium"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => openGallery(project)}
-                    className="inline-flex items-center gap-2 text-brand hover:opacity-80 transition-opacity text-sm font-medium group/btn"
-                  >
-                    View Gallery
-                    <ExternalLink size={14} className="group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+        {/* Temporary Notice */}
+        <div className="mb-8 rounded-xl border border-dashed border-brand/40 bg-brand/5 px-4 py-3 text-sm text-[#9ba1a6]">
+          Projects will be uploaded here soon. Please check back shortly to see the latest web development work.
         </div>
 
         {/* Call to Action */}
@@ -298,56 +224,6 @@ export default function WebDevelopmentPage() {
         </div>
       </div>
 
-      {/* Image Gallery Modal */}
-      {selectedProject && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-4xl w-full">
-            {/* Close Button */}
-            <button
-              onClick={closeGallery}
-              className="absolute top-4 right-4 z-10 bg-[#2e2e2e] text-white p-2 rounded-full hover:bg-[#3e3e3e] transition-colors"
-            >
-              <X size={24} />
-            </button>
-
-            {/* Navigation Arrows */}
-            <button
-              onClick={prevImage}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-[#2e2e2e] text-white p-3 rounded-full hover:bg-[#3e3e3e] transition-colors"
-            >
-              <ChevronLeft size={24} />
-            </button>
-
-            <button
-              onClick={nextImage}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-[#2e2e2e] text-white p-3 rounded-full hover:bg-[#3e3e3e] transition-colors"
-            >
-              <ChevronRight size={24} />
-            </button>
-
-            {/* Main Image */}
-            <div className="relative aspect-video rounded-lg overflow-hidden">
-              <Image
-                src={selectedProject.images[currentImageIndex]}
-                alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
-                fill
-                className="object-contain"
-              />
-            </div>
-
-            {/* Image Counter */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-[#2e2e2e] text-white px-3 py-1 rounded-full text-sm">
-              {currentImageIndex + 1} / {selectedProject.images.length}
-            </div>
-
-            {/* Project Info */}
-            <div className="mt-4 text-center">
-              <h3 className="text-xl font-semibold text-white mb-2">{selectedProject.title}</h3>
-              <p className="text-[#9ba1a6] text-sm">{selectedProject.description}</p>
-            </div>
-          </div>
-        </div>
-      )}
     </main>
   )
 }

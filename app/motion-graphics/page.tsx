@@ -1,28 +1,15 @@
 "use client"
 
 import Navbar from "@/components/ui/navbar"
-import {
-  ArrowLeft,
-  Play,
-  Pause,
-  SkipBack,
-  SkipForward,
-  Volume2,
-  VolumeX,
-  Maximize,
-  Minimize,
-  ExternalLink,
-  PlayCircle,
-} from "lucide-react"
+import { ArrowLeft, ExternalLink, PlayCircle } from "lucide-react"
 import Link from "next/link"
-import { useState, useEffect, useRef, useCallback } from "react"
+import { useEffect, useRef, useState } from "react"
 
 type MotionProject = {
   id: number
   title: string
   description: string
   videoUrl: string
-  videoSrc?: string // optional direct MP4 for custom player
   category: string
   tools: string[]
   year: string
@@ -33,24 +20,22 @@ type MotionProject = {
 const motionGraphicsProjects: MotionProject[] = [
   {
     id: 1,
-    title: "FNB Animation",
+    title: "Hollard ",
     description:
-      "Dynamic brand animation for FNB featuring smooth transitions and engaging visual elements.",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    videoSrc: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "Brand awareness animation for Hollard, using bold typography and smooth transitions to highlight key insurance benefits.",
+    videoUrl: "https://youtu.be/mZrXN_1EhqE",
     category: "Brand Animation",
     tools: ["Adobe After Effects", "Adobe Illustrator"],
-    year: "2024",
+    year: "2025",
     thumbnail: "/placeholder-1ged5.png",
-    duration: "1:25",
+    duration: "0:39",
   },
   {
     id: 2,
-    title: "Hollard *174#",
+    title: "FNB Animation",
     description:
-      "Interactive service animation showcasing Hollard's USSD service with clear call-to-action elements.",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    videoSrc: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      "Energetic promo animation for FNB, showcasing core offerings with clean iconography and dynamic motion.",
+    videoUrl: "https://youtu.be/nE2_jGaRIrM",
     category: "Service Animation",
     tools: ["Adobe After Effects", "Adobe Photoshop"],
     year: "2024",
@@ -59,12 +44,11 @@ const motionGraphicsProjects: MotionProject[] = [
   },
   {
     id: 3,
-    title: "Text Animation",
+    title: "Hollard | Track Claims",
     description:
-      "Creative typography animation demonstrating dynamic text effects and motion design principles.",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    videoSrc: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    category: "Typography",
+      "Step-by-step explainer animation showing Hollard customers how to track their insurance claims from start to finish.",
+    videoUrl: "https://www.youtube.com/watch?v=jrwJgFE1z20",
+    category: "Process Animation",
     tools: ["Adobe After Effects", "Adobe Illustrator"],
     year: "2023",
     thumbnail: "/corporate-presentation-templates.png",
@@ -72,12 +56,11 @@ const motionGraphicsProjects: MotionProject[] = [
   },
   {
     id: 4,
-    title: "Hollard | Claims submission",
+    title: "Cresta | Slideshow",
     description:
-      "Step-by-step animation guide for the claims submission process with intuitive visual flow.",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    videoSrc: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    category: "Process Animation",
+      "Slideshow-style motion graphics piece for Cresta, highlighting rooms, amenities, and brand details with smooth camera moves.",
+    videoUrl: "https://www.youtube.com/watch?v=aGDt2TnIU2I",
+    category: "Brand Animation",
     tools: ["Adobe After Effects", "Adobe Illustrator"],
     year: "2023",
     thumbnail: "/social-media-marketing-campaign.png",
@@ -85,11 +68,10 @@ const motionGraphicsProjects: MotionProject[] = [
   },
   {
     id: 5,
-    title: "Hollard | Track claims",
+    title: "Hollard | Submit claims",
     description:
-      "Interactive animation showing how users can track their insurance claims status.",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    videoSrc: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      "Clear guided animation walking users through how to submit their insurance claims with Hollard, from first step to confirmation.",
+    videoUrl: "https://www.youtube.com/watch?v=KplP_Wt3GiI",
     category: "Process Animation",
     tools: ["Adobe After Effects", "Adobe Illustrator"],
     year: "2023",
@@ -98,10 +80,10 @@ const motionGraphicsProjects: MotionProject[] = [
   },
   {
     id: 6,
-    title: "Cresta Mahalapye",
+    title: "B SIDE",
     description:
-      "Luxury hotel brand animation highlighting premium amenities and elegant design aesthetic.",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "Stylised B-SIDE visualizer featuring rhythmic motion, abstract graphics, and music-synced animations.",
+    videoUrl: "https://www.youtube.com/watch?v=bNj1EV35bAs",
     category: "Brand Animation",
     tools: ["Adobe After Effects", "Adobe Illustrator"],
     year: "2023",
@@ -117,25 +99,36 @@ function formatTime(seconds: number): string {
   return `${mins}:${secs < 10 ? "0" : ""}${secs}`
 }
 
-const PLAYBACK_SPEEDS = [0.5, 0.75, 1, 1.25, 1.5, 2]
+function getYouTubeId(url: string | undefined): string | undefined {
+  if (!url) return undefined
+  try {
+    const parsed = new URL(url)
+    if (parsed.hostname === "youtu.be") {
+      return parsed.pathname.replace("/", "")
+    }
+    if (parsed.hostname.includes("youtube.com")) {
+      const id = parsed.searchParams.get("v")
+      if (id) return id
+      if (parsed.pathname.startsWith("/embed/")) {
+        const parts = parsed.pathname.split("/")
+        return parts[parts.length - 1] || undefined
+      }
+    }
+  } catch {
+    return undefined
+  }
+  return undefined
+}
 
 export default function MotionGraphicsPage() {
   const [particlePositions, setParticlePositions] = useState<
     Array<{ left: string; top: string; delay: string; duration: string }>
   >([])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(0)
-  const [volume, setVolume] = useState(0.8)
-  const [isMuted, setIsMuted] = useState(false)
-  const [playbackSpeedIndex, setPlaybackSpeedIndex] = useState(2) // 1x
-  const [isFullscreen, setIsFullscreen] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const playerRef = useRef<any | null>(null)
+  const playerContainerRef = useRef<HTMLDivElement | null>(null)
 
   const currentProject = motionGraphicsProjects[currentIndex]
-  const hasNativeVideo = Boolean(currentProject?.videoSrc)
 
   useEffect(() => {
     const positions = Array(15)
@@ -149,153 +142,78 @@ export default function MotionGraphicsPage() {
     setParticlePositions(positions)
   }, [])
 
-  const loadVideo = useCallback((index: number) => {
+  const loadVideo = (index: number) => {
     const project = motionGraphicsProjects[index]
     if (!project) return
     setCurrentIndex(index)
-    // Effect below syncs video element and auto-plays
-  }, [])
+  }
 
+  // Initialize YouTube IFrame API player once
   useEffect(() => {
-    if (!currentProject?.videoSrc || !videoRef.current) return
-    videoRef.current.src = currentProject.videoSrc
-    videoRef.current.load()
-    videoRef.current.play().catch(() => {})
-    setIsPlaying(true)
-  }, [currentIndex, currentProject?.videoSrc])
+    if (typeof window === "undefined") return
 
-  const togglePlayPause = useCallback(() => {
-    if (!hasNativeVideo) return
-    const video = videoRef.current
-    if (!video) return
-    if (video.paused) {
-      video.play()
-      setIsPlaying(true)
-    } else {
-      video.pause()
-      setIsPlaying(false)
+    const w = window as any
+
+    const createPlayer = () => {
+      if (!playerContainerRef.current || playerRef.current || !w.YT || !w.YT.Player) return
+
+      const initialId = getYouTubeId(motionGraphicsProjects[0]?.videoUrl)
+
+      playerRef.current = new w.YT.Player(playerContainerRef.current, {
+        videoId: initialId,
+        playerVars: {
+          autoplay: 1,
+          controls: 1,
+          rel: 0,
+          modestBranding: 1,
+          playsinline: 1,
+        },
+        events: {
+          onStateChange: (event: any) => {
+            const YTState = w.YT?.PlayerState
+            if (YTState && event.data === YTState.ENDED) {
+              setCurrentIndex((prev) => (prev + 1) % motionGraphicsProjects.length)
+            }
+          },
+        },
+      })
     }
-  }, [hasNativeVideo])
 
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video || !hasNativeVideo) return
-    const onPlay = () => setIsPlaying(true)
-    const onPause = () => setIsPlaying(false)
-    const onTimeUpdate = () => setCurrentTime(video.currentTime)
-    const onLoadedMetadata = () => setDuration(video.duration)
-    const onEnded = () => {
-      setIsPlaying(false)
-      if (currentIndex < motionGraphicsProjects.length - 1) {
-        const next = motionGraphicsProjects.findIndex((p, i) => i > currentIndex && p.videoSrc)
-        if (next >= 0) loadVideo(next)
+    // If API already loaded, create player immediately
+    if (w.YT && w.YT.Player) {
+      createPlayer()
+    } else {
+      // Inject script if needed
+      if (!document.getElementById("youtube-iframe-api")) {
+        const tag = document.createElement("script")
+        tag.src = "https://www.youtube.com/iframe_api"
+        tag.id = "youtube-iframe-api"
+        document.body.appendChild(tag)
+      }
+
+      // Chain onto global callback
+      const prevOnReady = w.onYouTubeIframeAPIReady
+      w.onYouTubeIframeAPIReady = () => {
+        if (typeof prevOnReady === "function") prevOnReady()
+        createPlayer()
       }
     }
-    video.addEventListener("play", onPlay)
-    video.addEventListener("pause", onPause)
-    video.addEventListener("timeupdate", onTimeUpdate)
-    video.addEventListener("loadedmetadata", onLoadedMetadata)
-    video.addEventListener("ended", onEnded)
+
     return () => {
-      video.removeEventListener("play", onPlay)
-      video.removeEventListener("pause", onPause)
-      video.removeEventListener("timeupdate", onTimeUpdate)
-      video.removeEventListener("loadedmetadata", onLoadedMetadata)
-      video.removeEventListener("ended", onEnded)
-    }
-  }, [hasNativeVideo, currentIndex, loadVideo])
-
-  const setProgress = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!hasNativeVideo || !videoRef.current) return
-      const rect = e.currentTarget.getBoundingClientRect()
-      const x = (e.clientX - rect.left) / rect.width
-      const newTime = x * duration
-      videoRef.current.currentTime = newTime
-      setCurrentTime(newTime)
-    },
-    [hasNativeVideo, duration]
-  )
-
-  const toggleMute = useCallback(() => {
-    if (!videoRef.current) return
-    videoRef.current.muted = !isMuted
-    setIsMuted(!isMuted)
-  }, [isMuted])
-
-  const handleVolumeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const v = Number(e.target.value) / 100
-    setVolume(v)
-    if (videoRef.current) {
-      videoRef.current.volume = v
-      videoRef.current.muted = v === 0
-      setIsMuted(v === 0)
-    }
-  }, [])
-
-  const cyclePlaybackSpeed = useCallback(() => {
-    if (!videoRef.current) return
-    const next = (playbackSpeedIndex + 1) % PLAYBACK_SPEEDS.length
-    setPlaybackSpeedIndex(next)
-    videoRef.current.playbackRate = PLAYBACK_SPEEDS[next]
-  }, [playbackSpeedIndex])
-
-  const toggleFullscreen = useCallback(() => {
-    const container = containerRef.current
-    if (!container) return
-    if (!document.fullscreenElement) {
-      container.requestFullscreen?.()
-      setIsFullscreen(true)
-    } else {
-      document.exitFullscreen?.()
-      setIsFullscreen(false)
-    }
-  }, [])
-
-  const rewind = useCallback(() => {
-    if (videoRef.current) videoRef.current.currentTime = Math.max(0, videoRef.current.currentTime - 10)
-  }, [])
-  const forward = useCallback(() => {
-    if (videoRef.current)
-      videoRef.current.currentTime = Math.min(
-        videoRef.current.duration,
-        videoRef.current.currentTime + 10
-      )
-  }, [])
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (!hasNativeVideo) return
-      switch (e.key) {
-        case " ":
-        case "k":
-          e.preventDefault()
-          togglePlayPause()
-          break
-        case "m":
-          toggleMute()
-          break
-        case "f":
-          toggleFullscreen()
-          break
-        case "ArrowLeft":
-          e.preventDefault()
-          if (videoRef.current)
-            videoRef.current.currentTime = Math.max(0, videoRef.current.currentTime - 5)
-          break
-        case "ArrowRight":
-          e.preventDefault()
-          if (videoRef.current)
-            videoRef.current.currentTime = Math.min(
-              videoRef.current.duration,
-              videoRef.current.currentTime + 5
-            )
-          break
+      if (playerRef.current) {
+        playerRef.current.destroy()
+        playerRef.current = null
       }
     }
-    window.addEventListener("keydown", handler)
-    return () => window.removeEventListener("keydown", handler)
-  }, [hasNativeVideo, togglePlayPause, toggleMute, toggleFullscreen])
+  }, [])
+
+  // When the selected project changes, load the corresponding YouTube video
+  useEffect(() => {
+    const id = getYouTubeId(currentProject?.videoUrl)
+    if (playerRef.current && id) {
+      playerRef.current.loadVideoById(id)
+    }
+  }, [currentProject?.videoUrl, currentIndex])
 
   return (
     <main className="min-h-screen bg-[#151718] text-[#ecedee] transition-colors duration-300">
@@ -346,126 +264,11 @@ export default function MotionGraphicsPage() {
 
         {/* Player wrapper: main video + sidebar playlist (motion3 style) */}
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
-          {/* Video container with custom controls */}
-          <div
-            ref={containerRef}
-            className="flex-[3] rounded-xl overflow-hidden bg-black shadow-xl relative group"
-          >
-            {hasNativeVideo ? (
-              <>
-                <video
-                  ref={videoRef}
-                  className="w-full h-auto block bg-black"
-                  preload="auto"
-                  onClick={togglePlayPause}
-                  playsInline
-                  autoPlay
-                />
-                {/* Preload other videos so they're ready when user switches */}
-                {motionGraphicsProjects.map(
-                  (project, index) =>
-                    project.videoSrc &&
-                    index !== currentIndex && (
-                      <video
-                        key={index}
-                        preload="auto"
-                        src={project.videoSrc}
-                        className="hidden"
-                        aria-hidden
-                      />
-                    )
-                )}
-                <div
-                  className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                >
-                  {/* Progress bar */}
-                  <div
-                    className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden cursor-pointer"
-                    onClick={setProgress}
-                  >
-                    <div
-                      className="h-full bg-brand rounded-full transition-[width] duration-100"
-                      style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }}
-                    />
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={togglePlayPause}
-                        className="w-11 h-11 rounded-full bg-brand hover:opacity-90 flex items-center justify-center text-white transition-opacity"
-                      >
-                        {isPlaying ? <Pause size={20} /> : <Play size={20} className="ml-0.5" />}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={rewind}
-                        className="p-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-colors"
-                      >
-                        <SkipBack size={18} />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={forward}
-                        className="p-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-colors"
-                      >
-                        <SkipForward size={18} />
-                      </button>
-                      <div className="flex items-center gap-1.5">
-                        <button
-                          type="button"
-                          onClick={toggleMute}
-                          className="p-2 text-white/90 hover:text-white rounded-full transition-colors"
-                        >
-                          {isMuted || volume === 0 ? (
-                            <VolumeX size={18} />
-                          ) : (
-                            <Volume2 size={18} />
-                          )}
-                        </button>
-                        <input
-                          type="range"
-                          min="0"
-                          max="100"
-                          value={isMuted ? 0 : volume * 100}
-                          onChange={handleVolumeChange}
-                          className="w-16 h-1 accent-brand cursor-pointer"
-                        />
-                      </div>
-                      <span className="text-[#9ba1a6] text-sm font-mono">
-                        {formatTime(currentTime)} / {formatTime(duration)}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={cyclePlaybackSpeed}
-                        className="px-2 py-1 text-sm text-[#9ba1a6] hover:text-white hover:bg-white/10 rounded transition-colors"
-                      >
-                        {PLAYBACK_SPEEDS[playbackSpeedIndex]}x
-                      </button>
-                      <button
-                        type="button"
-                        onClick={toggleFullscreen}
-                        className="p-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-colors"
-                      >
-                        {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div className="aspect-video flex items-center justify-center bg-[#151718]">
-                <iframe
-                  src={currentProject?.videoUrl}
-                  title={currentProject?.title ?? "Video"}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            )}
+          {/* Video container with YouTube player */}
+          <div className="flex-[3] rounded-xl overflow-hidden bg-black shadow-xl relative">
+            <div className="aspect-video flex items-center justify-center bg-[#151718]">
+              <div ref={playerContainerRef} className="w-full h-full" />
+            </div>
           </div>
 
           {/* Sidebar playlist (motion3 style) */}
@@ -530,7 +333,7 @@ export default function MotionGraphicsPage() {
             ))}
           </div>
           <a
-            href={currentProject?.videoUrl?.replace("/embed/", "/watch?v=")}
+            href={currentProject?.videoUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-brand hover:opacity-80 transition-opacity text-sm font-medium"

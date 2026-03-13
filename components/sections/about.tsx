@@ -71,14 +71,17 @@ export default function About() {
         >
           <div className="bg-[#1c1c1c] p-6 rounded-xl border border-[#2e2e2e]">
             <p className="text-[#9ba1a6] leading-relaxed text-sm">
-              I AM a creative powerhouse with over 10 years of experience in graphic design, motion graphics, and web
-              development. I bring ideas to life with bold visuals, seamless animations, and pixel-perfect digital
-              experiences.
+            I am a creative technologist with over 10 years of experience spanning graphic design, 
+            motion graphics, web development, and AI-powered systems. I specialize in turning ideas into intelligent digital experiences, 
+            combining bold visuals, seamless animation, and scalable technology.
             </p>
             <p className="text-[#9ba1a6] leading-relaxed mt-4 text-sm">
-              Whether it's crafting eye-catching brands, dynamic video content, or interactive websites, I blend
-              artistry with tech-savvy precision to create work that grabs attention and gets results. Always ahead of
-              trends, I thrive on pushing creative boundaries and turning big ideas into visual magic.
+            My work goes beyond traditional design. I integrate models and APIs to create tools, workflows, and 
+            products that solve real problems. Having served twice as a Creative Director, I bring both creative vision and strategic thinking to every project, 
+            crafting impactful marketing campaigns, immersive content, and digital platforms that deliver real results.
+            <br />
+            <br />
+            I thrive at the intersection of creativity and technology, constantly pushing boundaries and transforming ambitious ideas into powerful solutions.
             </p>
           </div>
 

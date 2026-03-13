@@ -2,8 +2,15 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import { Montserrat } from "next/font/google"
 import { ArrowDown, Quote } from "lucide-react"
 import { cn } from "@/lib/utils"
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["100", "700"],
+  display: "swap",
+})
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false)
@@ -47,12 +54,17 @@ export default function Hero() {
         </p>
 
         {/* Name: big and confident */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[1.05]">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-brand to-brand-accent">
+        <h1
+          className={cn(
+            "text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[-0.03em] leading-[1.05]",
+            montserrat.className,
+          )}
+        >
+          <span className="font-thin text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-brand to-brand-accent">
             Obokeng
           </span>
           <br />
-          <span className="text-[#11181c] dark:text-[#ecedee]">Makwati</span>
+          <span className="font-bold text-[#11181c] dark:text-[#ecedee]">Makwati</span>
         </h1>
 
         {/* Tagline */}

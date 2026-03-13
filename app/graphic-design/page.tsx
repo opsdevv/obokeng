@@ -8,70 +8,81 @@ import Image from "next/image"
 const graphicDesignProjects = [
   {
     id: 1,
-    title: "Marathon Countdown",
+    title: "Hollard Insurance",
     description:
-      "Complete brand identity package including logo, color palette, and brand guidelines for a tech startup.",
+      "Hollard Insurance is one of the largest privately owned insurance companies in Africa, offering innovative life and short-term insurance solutions. It focuses on making insurance accessible through partnerships, technology, and customer-centric products.",
     images: [
       "/box.jpg",
       "/Brochure1.jpg",
-      "/images/countdown 3.jpg",
-      "/images/countdown 2.jpg",
-      "/images/countdown 1.jpg",
+      "/images/ann.jpg",
+    
     ],
-    category: "Branding",
-    tools: ["Adobe Illustrator", "Adobe Photoshop"],
-    year: "2024",
+    category: "Design",
+    tools: ["Adobe Illustrator", "| Adobe Photoshop", "| Adobe InDesign"],
+    year: "",
   },
   {
     id: 2,
-    title: "Marketing Campaign Visuals",
+    title: "Sesiro Insurance",
     description:
-      "Social media graphics and print materials for a comprehensive marketing campaign, including banners, flyers, and promotional assets.",
+      "Sesiro is a citizen-owned insurance company in Botswana that provides life insurance and financial protection solutions tailored to individuals, families, and businesses. It focuses on accessible, locally driven services that promote financial security and long-term stability.",
     images: ["/mining.jpg", "/back.jpg", "/stall.jpg", "/art1.jpg"],
-    category: "Marketing",
-    tools: ["Adobe Creative Suite", "Figma"],
-    year: "2024",
+    category: "Design",
+    tools: ["Adobe Creative Suite", ""],
+    year: "",
   },
   {
     id: 3,
-    title: "Corporate Presentation Design",
+    title: "Cresta Hotels",
     description:
-      "Professional presentation templates and infographics for corporate communications, designed for clarity and brand consistency.",
-    images: ["/t3.png", "/2.jpg", "/consumer-goods-packaging.png"],
+      "Cresta Hotels is a leading hospitality group in Southern Africa, operating 17 hotels and resorts across Botswana, Zimbabwe, and South Africa. The brand is known for offering comfortable accommodation, conferencing facilities, and authentic African hospitality for both business and leisure travelers.",
+    images: ["/t3.png", "/2.jpg", "/2.jpg"],
     category: "Corporate",
-    tools: ["Adobe InDesign", "Adobe Illustrator"],
-    year: "2023",
+    tools: ["Adobe InDesign", " | Adobe Illustrator"],
+    year: "",
   },
   {
     id: 4,
-    title: "Event Poster Series",
+    title: "Botswana Life",
     description:
-      "Eye-catching poster designs for music events and cultural festivals, with bold typography and vibrant visuals.",
-    images: ["/skoonologo.jpg", "/product.jpg", "/20l.jpg"],
+      "Botswana Life is the country’s leading life insurance provider, offering a wide range of protection, savings, and investment solutions for individuals and businesses. The company focuses on helping Batswana build long-term financial security and wealth.",
+    images: ["/images/thedate.jpg", "/images/repo.jpg", "/images/pensioners.jpg", "/images/show.jpg", "/images/thanks.jpg" , "/images/article.jpg"],
     category: "Events",
-    tools: ["Adobe Photoshop", "Adobe Illustrator"],
+    tools: ["Adobe Photoshop", "| Adobe Illustrator | Adobe InDesign"],
     year: "2023",
   },
   {
     id: 5,
-    title: "Package Design",
+    title: "Association of Life Underwriters Botswana",
     description:
-      "Product packaging design for consumer goods with focus on shelf appeal and brand recognition.",
-    images: ["/alublogo.png", "/placeholder-d8445.png", "/corporate-presentation-templates.png"],
-    category: "Packaging",
-    tools: ["Adobe Illustrator", "Adobe Dimension"],
-    year: "2021",
+      "Association of Life Underwriters Botswana is a professional body that represents life insurance advisors and underwriters in Botswana. It promotes ethical standards, professional development, and best practices within the life insurance industry. ",
+    images: ["/alublogo.png",],
+    category: "Logo design",
+    tools: ["Adobe Illustrator"],
+    year: "",
   },
   {
     id: 6,
-    title: "Digital Illustrations",
+    title: "Aasa Farms",
     description:
-      "Custom digital illustrations for web and print applications, including branding assets and editorial artwork.",
-    images: ["/images/branding.jpg", "/logo1.png", "/consumer-goods-packaging.png"],
-    category: "Illustration",
-    tools: ["Adobe Illustrator", "Procreate"],
-    year: "2024",
+      "Aasa Farms is a growing startup farm in Botswana that recently expanded into a butchery, supplying fresh, locally sourced meat. The business is proudly run by a young female entrepreneur focused on quality, sustainability, and community-driven agriculture.",
+    images: ["/images/branding.jpg", "/logo1.png",],
+    category: "Logo design & Branding",
+    tools: ["Adobe Illustrator", "| Adobe Photoshop"],
+    year: "",
   },
+  {
+    id: 7,
+    title: "Rockfall Lekgowe Law Group",
+    description:
+      "Rockfall Lekgowe Law Group is a Botswana-based legal practice providing professional legal services across areas such as corporate law, litigation, and advisory services. The firm focuses on delivering strategic legal solutions to individuals, businesses, and institutions.",
+    images: ["/images/dia.jpg", "/images/happy.jpg", "/images/maun.jpg", "/images/chedza.jpg", ],
+    category: "Comms",
+    tools: ["Adobe Illustrator", "| Adobe Photoshop"],
+    year: "",
+  },
+
+
 ]
 
 export default function GraphicDesignPage() {
