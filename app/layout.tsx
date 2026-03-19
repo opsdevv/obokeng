@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
+import { NavigationProgress } from "@/components/ui/navigation-progress"
 import "./globals.css"
 
 const inter = Inter({
@@ -38,6 +39,7 @@ html {
           enableSystem
           disableTransitionOnChange
         >
+          <NavigationProgress />
           {children}
         </ThemeProvider>
       </body>
