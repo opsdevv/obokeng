@@ -46,7 +46,7 @@ const graphicDesignProjects = [
     title: "Botswana Life",
     description:
       "Botswana Life is the country’s leading life insurance provider, offering a wide range of protection, savings, and investment solutions for individuals and businesses. The company focuses on helping Batswana build long-term financial security and wealth.",
-    images: ["/images/thedate.jpg", "/images/repo.jpg", "/images/pensioners.jpg", "/images/show.jpg", "/images/thanks.jpg" , "/images/article.jpg"],
+    images: ["/images/thedate.jpg", "/images/bus.jpg", "/images/pensioners.jpg", "/images/show.jpg", "/images/thanks.jpg" , "/images/article.jpg"],
     category: "Events",
     tools: ["Adobe Photoshop", "| Adobe Illustrator | Adobe InDesign"],
     year: "2023",

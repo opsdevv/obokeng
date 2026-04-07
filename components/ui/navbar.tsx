@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import Image from "next/image"
-import { Menu, X } from "lucide-react"
+import { LayoutDashboard, LogIn, LogOut, Menu, X } from "lucide-react"
+import type { User } from "@supabase/supabase-js"
 import { cn } from "@/lib/utils"
+import { createClient } from "@/lib/supabase/client"
+import { LoginDialog } from "@/components/auth/login-dialog"
 import { GlowMenu } from "./glow-menu"
 
 const navItems = [
@@ -24,7 +27,10 @@ const pageLinks = [
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false)
 	const [scrolled, setScrolled] = useState(false)
+	const [loginOpen, setLoginOpen] = useState(false)
+	const [user, setUser] = useState<User | null>(null)
 	const pathname = usePathname()
+	const router = useRouter()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -34,6 +40,35 @@ export default function Navbar() {
 		window.addEventListener("scroll", handleScroll)
 		return () => window.removeEventListener("scroll", handleScroll)
 	}, [])
+
+	useEffect(() => {
+		const supabase = createClient()
+		supabase.auth.getSession().then(({ data: { session } }) => {
+			setUser(session?.user ?? null)
+		})
+		const {
+			data: { subscription },
+		} = supabase.auth.onAuthStateChange((_event, session) => {
+			setUser(session?.user ?? null)
+		})
+		return () => subscription.unsubscribe()
+	}, [])
+
+	useEffect(() => {
+		if (typeof window === "undefined") return
+		const q = new URLSearchParams(window.location.search)
+		if (q.get("login") === "required") {
+			setLoginOpen(true)
+		}
+	}, [pathname])
+
+	async function handleSignOut() {
+		const supabase = createClient()
+		await supabase.auth.signOut()
+		router.push("/")
+		router.refresh()
+		setIsOpen(false)
+	}
 
 	return (
 		<nav
@@ -55,6 +90,36 @@ export default function Navbar() {
 						<GlowMenu items={pageLinks} />
 						
 						<GlowMenu items={navItems.filter((i) => i.name !== "Contact")} />
+
+						{user ? (
+							<>
+								<Link
+									href="/dashboard"
+									className="inline-flex items-center gap-2 rounded-lg border border-[#2e2e2e] bg-[#1c1c1c] text-[#ecedee] text-sm font-medium px-4 py-2.5 hover:bg-[#232323] transition-colors"
+								>
+									<LayoutDashboard className="h-4 w-4" />
+									Dashboard
+								</Link>
+								<button
+									type="button"
+									onClick={() => void handleSignOut()}
+									className="inline-flex items-center gap-2 rounded-lg border border-[#2e2e2e] text-[#9ba1a6] text-sm font-medium px-4 py-2.5 hover:text-[#ecedee] hover:border-[#404040] transition-colors"
+								>
+									<LogOut className="h-4 w-4" />
+									Sign out
+								</button>
+							</>
+						) : (
+							<button
+								type="button"
+								onClick={() => setLoginOpen(true)}
+								className="inline-flex items-center gap-2 rounded-lg border border-[#2e2e2e] bg-[#1c1c1c] text-[#ecedee] text-sm font-medium px-4 py-2.5 hover:bg-[#232323] transition-colors"
+								aria-label="Sign in"
+							>
+								<LogIn className="h-4 w-4" />
+								Sign in
+							</button>
+						)}
 
 						<Link
 							href="/#contact"
@@ -100,7 +165,39 @@ export default function Navbar() {
 								{item.name}
 							</Link>
 						))}
-						<div className="pt-3">
+						<div className="pt-3 space-y-2">
+							{user ? (
+								<>
+									<Link
+										href="/dashboard"
+										className="flex items-center justify-center gap-2 w-full rounded-lg border border-[#2e2e2e] bg-[#1c1c1c] text-[#ecedee] py-3 text-sm font-medium"
+										onClick={() => setIsOpen(false)}
+									>
+										<LayoutDashboard className="h-4 w-4" />
+										Dashboard
+									</Link>
+									<button
+										type="button"
+										onClick={() => void handleSignOut()}
+										className="flex items-center justify-center gap-2 w-full rounded-lg border border-[#2e2e2e] text-[#9ba1a6] py-3 text-sm font-medium"
+									>
+										<LogOut className="h-4 w-4" />
+										Sign out
+									</button>
+								</>
+							) : (
+								<button
+									type="button"
+									onClick={() => {
+										setIsOpen(false)
+										setLoginOpen(true)
+									}}
+									className="flex items-center justify-center gap-2 w-full rounded-lg border border-[#2e2e2e] bg-[#1c1c1c] text-[#ecedee] py-3 text-sm font-medium"
+								>
+									<LogIn className="h-4 w-4" />
+									Sign in
+								</button>
+							)}
 							<Link
 								href="/#contact"
 								className="block w-full text-center rounded-lg bg-brand text-white py-3 text-sm font-medium hover:opacity-90 transition-opacity"
@@ -112,6 +209,8 @@ export default function Navbar() {
 					</div>
 				</div>
 			)}
+
+			<LoginDialog open={loginOpen} onOpenChange={setLoginOpen} />
 		</nav>
 	)
 }
