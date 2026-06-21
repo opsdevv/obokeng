@@ -46,7 +46,7 @@ const graphicDesignProjects = [
     title: "Botswana Life",
     description:
       "Botswana Life is the country’s leading life insurance provider, offering a wide range of protection, savings, and investment solutions for individuals and businesses. The company focuses on helping Batswana build long-term financial security and wealth.",
-    images: ["/images/thedate.jpg", "/images/bus.jpg", "/images/pensioners.jpg", "/images/show.jpg", "/images/thanks.jpg" , "/images/article.jpg"],
+    images: ["/images/thedate.jpg", "/images/bus.jpg", "/images/pensioners.jpg", "/images/show.jpg", "/images/thanks.jpg" , "/images/stall.jpeg"],
     category: "Events",
     tools: ["Adobe Photoshop", "| Adobe Illustrator | Adobe InDesign"],
     year: "2023",
@@ -73,10 +73,10 @@ const graphicDesignProjects = [
   },
   {
     id: 7,
-    title: "Rockfall Lekgowe Law Group",
+    title: "Botswana Insurance Company",
     description:
-      "Rockfall Lekgowe Law Group is a Botswana-based legal practice providing professional legal services across areas such as corporate law, litigation, and advisory services. The firm focuses on delivering strategic legal solutions to individuals, businesses, and institutions.",
-    images: ["/images/dia.jpg", "/images/happy.jpg", "/images/maun.jpg", "/images/chedza.jpg", ],
+      "Botswana Insurance Company (BIC) is one of Botswana’s leading short-term insurance providers, offering a wide range of personal, commercial, and specialized insurance solutions. Established in 1975, BIC has built a strong reputation for protecting individuals, families, and businesses through innovative products, reliable service, and a commitment to making life better for Batswana.",
+    images: ["/images/stage.jpg", "/images/n1.jpg", "/images/trust.jpg", "/images/04.jpg", ],
     category: "Comms",
     tools: ["Adobe Illustrator", "| Adobe Photoshop"],
     year: "",
