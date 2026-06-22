@@ -46,7 +46,7 @@ const graphicDesignProjects = [
     title: "Botswana Life",
     description:
       "Botswana Life is the country’s leading life insurance provider, offering a wide range of protection, savings, and investment solutions for individuals and businesses. The company focuses on helping Batswana build long-term financial security and wealth.",
-    images: ["/images/thedate.jpg", "/images/bus.jpg", "/images/pensioners.jpg", "/images/show.jpg", "/images/thanks.jpg" , "/images/stall.jpeg"],
+    images: ["/images/thedate.jpg", "/images/bus.jpg", "/images/pensioners.jpg", "/images/nin.jpg", "/images/thanks.jpg" , "/images/stall.jpeg"],
     category: "Events",
     tools: ["Adobe Photoshop", "| Adobe Illustrator | Adobe InDesign"],
     year: "2023",
@@ -76,7 +76,7 @@ const graphicDesignProjects = [
     title: "Botswana Insurance Company",
     description:
       "Botswana Insurance Company (BIC) is one of Botswana’s leading short-term insurance providers, offering a wide range of personal, commercial, and specialized insurance solutions. Established in 1975, BIC has built a strong reputation for protecting individuals, families, and businesses through innovative products, reliable service, and a commitment to making life better for Batswana.",
-    images: ["/images/stage.jpg", "/images/n1.jpg", "/images/trust.jpg", "/images/04.jpg", ],
+    images: ["/images/stage.jpg", "/images/investor.png", "/images/n1.jpg", "/images/mock.png", "/images/04.jpg", ],
     category: "Comms",
     tools: ["Adobe Illustrator", "| Adobe Photoshop"],
     year: "",
